@@ -1,4 +1,4 @@
-// import { getUser } from './API/server-request';
+import { getUser } from './API/server-request';
 
 // Делаем запрос пользователя с данным ID
 
@@ -57,13 +57,13 @@
 // }
 // addBookAndUpdateUI();
 
-import axios from 'axios';
+// import axios from 'axios';
 
-const BASE_URL = ' https://api.themoviedb.org/3';
+// const BASE_URL = ' https://api.themoviedb.org/3';
 
-const getPopuletMovies = () => {
-  axios.get(`
-`);
-};
+// const getPopuletMovies = () => {
+//   axios.get(`
+// `);
+// };
 
 // 76ed63f80dba3e42bfe198c0806fa9ba
