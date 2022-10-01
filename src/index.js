@@ -1,6 +1,8 @@
 import { getUser } from './API/server-request';
-
+// import { Handlebars } from './components/example.handlebars';
 // Делаем запрос пользователя с данным ID
+// let Handlebars = require('./components/movieCard.hbs');
+// console.log('Handlebars', Handlebars);
 
 // function renderBook(book) {
 //   //! опции метода
