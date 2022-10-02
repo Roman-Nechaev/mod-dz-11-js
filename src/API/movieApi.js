@@ -2,10 +2,12 @@ const axios = require('axios');
 import apiSrttings from './settingsMovie';
 
 const { movieAPIUrl, movieKey } = apiSrttings;
-export const getPopuletMovies = () => {
+
+export const getPopuletMovies = (page = 1) => {
   return axios.get(`${movieAPIUrl}/movie/popular`, {
     params: {
       api_key: movieKey,
+      page: page,
     },
   });
 };
