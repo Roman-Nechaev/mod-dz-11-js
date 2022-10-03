@@ -1,73 +1,38 @@
 import { getUser } from './API/server-request';
-// import { Handlebars } from './components/example.handlebars';
-// Делаем запрос пользователя с данным ID
-// let Handlebars = require('./components/movieCard.hbs');
-// console.log('Handlebars', Handlebars);
+import imgListTamplate from './components/imgList.hbs';
 
-// function renderBook(book) {
-//   //! опции метода
-//   const options = {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(book),
-//   };
-//   //! запрос на сервер с опциями добавления
-//   fetch(`http://localhost:3000/books`, options)
-//     .then(res => res.json(book))
-//     .then(data => console.log(data));
-// }
+search = 'dog';
 
-// renderBook({
-//   title: 'Добовление книги ',
-//   author: 'Роман',
-//   genres: ['POST'],
-//   rating: 9,
-// });
+const galleryListRef = document.querySelector('.gallery');
 
-//////////////////////////////////////////////////!
-// async function asyncRenderBook(book) {
-//   // ! опции метода
-//   const options = {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(book),
-//   };
-//   const response = await fetch(`http://localhost:3000/books`, options);
-//   const pars = response.json();
+const renderImg = hits => {
+  const listimg = hits.map(hit => {
+    const {
+      webformatURL,
+      largeImageURL,
+      tags,
+      likes,
+      views,
+      comments,
+      downloads,
+    } = hit;
+    return {
+      webformatURL,
+      likes,
+      tags,
+      views,
+      comments,
+      largeImageURL,
+      downloads,
+    };
+    console.log(webformatURL);
+  });
 
-//   return pars;
-// }
+  galleryListRef.innerHTML = imgListTamplate(listimg);
+};
 
-// asyncRenderBook({
-//   title: 'Добовление книги ',
-//   author: 'Роман',
-//   genres: ['POST'],
-//   rating: 9,
-// }).then(book => console.log(book));
-
-// async function addBookAndUpdateUI() {
-//   try {
-//     const book = await asyncRenderBook({});
-//     console.log(book);
-//   } catch (error) {
-//     console.log('Ошибка');
-//   }
-// }
-// addBookAndUpdateUI();
-
-// import axios from 'axios';
-
-// const BASE_URL = ' https://api.themoviedb.org/3';
-
-// const getPopuletMovies = () => {
-//   axios.get(`
-// `);
-// };
-
-// 76ed63f80dba3e42bfe198c0806fa9ba
-
-////////
+getUser(search).then(({ data }) => {
+  const { hits } = data;
+  console.log(hits);
+  renderImg(hits);
+});
