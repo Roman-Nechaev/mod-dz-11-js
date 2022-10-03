@@ -1,7 +1,7 @@
 import { getUser } from './API/server-request';
 import imgListTamplate from './components/imgList.hbs';
 
-search = 'dog';
+search = 'js';
 
 const galleryListRef = document.querySelector('.gallery');
 
@@ -25,7 +25,6 @@ const renderImg = hits => {
       largeImageURL,
       downloads,
     };
-    console.log(webformatURL);
   });
 
   galleryListRef.innerHTML = imgListTamplate(listimg);
