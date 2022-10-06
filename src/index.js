@@ -1,9 +1,29 @@
 import { getUser } from './API/server-request';
 import imgListTamplate from './components/imgList.hbs';
 
-search = 'js';
+let search = 'cat';
 
 const galleryListRef = document.querySelector('.gallery');
+const searchFormRef = document.querySelector('.search-form');
+
+searchFormRef.addEventListener('submit', sabmitFormOn);
+
+// let isDataLoading = false;
+function sabmitFormOn(evt) {
+  evt.preventDefault();
+
+  const { currentTarget: formRef } = evt;
+  //   if (isDataLoading) return;
+  //   isDataLoading = true;
+
+  const formData = new FormData(formRef);
+  const body = '';
+
+  formData.forEach((value, kay) => {
+    body[kay] = search;
+    requestUser(value); //поисковый запрос
+  });
+}
 
 const renderImg = hits => {
   const listimg = hits.map(hit => {
@@ -28,10 +48,13 @@ const renderImg = hits => {
   });
 
   galleryListRef.innerHTML = imgListTamplate(listimg);
-};
+}; // отрисовка страницы
 
-getUser(search).then(({ data }) => {
-  const { hits } = data;
-  console.log(hits);
-  renderImg(hits);
-});
+async function requestUser(pr) {
+  try {
+    const dataRequest = await getUser(pr);
+    renderImg(dataRequest); // рендер принемает данные сервера
+  } catch (error) {
+    console.log('Ошибка');
+  }
+} // запрос на сервер промис
