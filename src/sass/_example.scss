@@ -2,48 +2,42 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.5;
-  background-color: #fff;
-  color: #2f2f37;
+  background-color: rgb(153, 236, 255);
+
   max-width: 960px;
   padding: 16px;
 }
 
-.example code {
-  font-family: monospace;
-  font-size: 16px;
-  font-weight: 700;
-  background-color: #ff6b0a;
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: 2px;
+body {
+  background-color: rgba(153, 236, 255, 0.411);
 }
 
-.example .background {
-  height: 240px;
-  // ❗️❗️❗️ The path to images from a SASS file
-  // is always the same as from the css folder.
-  background-image: url('../images/logo.png');
-  background-size: cover;
-  background-position: center;
+.search-form{
+  background-color: rgb(153, 236, 255);
+
 }
 
-.photo-card {
+.gallery{
+display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 1rem;
+  margin: 10px;
+background: rgba(0, 0, 0, 0.163);
 
-
-  margin: 30px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    width: 40%;
 }
+.photo-card{
+border-radius: 20%;
 
-
-.photo-card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 .info{
+background: rgba(152, 15, 15, 0.163);
+display: flex;
+word-break: break-all
+
+}
+.info-item{
 
 }
 
-.info-item {
-  padding: 2px 16px;
-}
+
+  

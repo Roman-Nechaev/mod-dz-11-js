@@ -1,60 +1,40 @@
 import { getUser } from './API/server-request';
 import imgListTamplate from './components/imgList.hbs';
-
+import PaxaBayServiseApi from './API/photo-servis-api';
 let search = 'cat';
 
 const galleryListRef = document.querySelector('.gallery');
 const searchFormRef = document.querySelector('.search-form');
+const loadMoreBtn = document.querySelector('.load-more');
 
 searchFormRef.addEventListener('submit', sabmitFormOn);
+loadMoreBtn.addEventListener('click', OnLoadMoreQuery);
+const paxaBayServiseApi = new PaxaBayServiseApi();
 
-// let isDataLoading = false;
 function sabmitFormOn(evt) {
   evt.preventDefault();
 
-  const { currentTarget: formRef } = evt;
-  //   if (isDataLoading) return;
-  //   isDataLoading = true;
+  const search = evt.currentTarget.elements.searchQuery.value;
 
-  const formData = new FormData(formRef);
-  const body = '';
-
-  formData.forEach((value, kay) => {
-    body[kay] = search;
-    requestUser(value); //поисковый запрос
+  paxaBayServiseApi.query = search;
+  paxaBayServiseApi.resetPage(); // сброс страницы
+  paxaBayServiseApi.fetchImg().then(hits => {
+    clearImgListContainer(); // ощищает форму перед новым запросом поиска
+    appendImgListTamplate(hits);
+  });
+  paxaBayServiseApi.fetchImg().then(hits => {
+    console.log(hits.total);
   });
 }
 
-const renderImg = hits => {
-  const listimg = hits.map(hit => {
-    const {
-      webformatURL,
-      largeImageURL,
-      tags,
-      likes,
-      views,
-      comments,
-      downloads,
-    } = hit;
-    return {
-      webformatURL,
-      likes,
-      tags,
-      views,
-      comments,
-      largeImageURL,
-      downloads,
-    };
-  });
+function OnLoadMoreQuery() {
+  paxaBayServiseApi.fetchImg().then(appendImgListTamplate);
+}
 
-  galleryListRef.innerHTML = imgListTamplate(listimg);
-}; // отрисовка страницы
+function appendImgListTamplate(hits) {
+  galleryListRef.insertAdjacentHTML('beforeend', imgListTamplate(hits));
+}
 
-async function requestUser(pr) {
-  try {
-    const dataRequest = await getUser(pr);
-    renderImg(dataRequest); // рендер принемает данные сервера
-  } catch (error) {
-    console.log('Ошибка');
-  }
-} // запрос на сервер промис
+function clearImgListContainer() {
+  galleryListRef.innerHTML = '';
+}
