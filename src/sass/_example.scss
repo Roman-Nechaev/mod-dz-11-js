@@ -5,7 +5,7 @@
   background-color: rgb(153, 236, 255);
 
   max-width: 960px;
-  padding: 16px;
+margin-top: 20px;
 }
 
 body {
@@ -13,7 +13,13 @@ body {
 }
 
 .search-form{
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  margin-bottom: 24px;
+  
   background-color: rgb(153, 236, 255);
+  
 
 }
 
@@ -27,9 +33,11 @@ background: rgba(0, 0, 0, 0.163);
 }
 .photo-card{
 border-radius: 20%;
+grid-template: repeat(2, 1fr) / repeat(2, 1fr);
 
 }
 .info{
+
 background: rgba(152, 15, 15, 0.163);
 display: flex;
 word-break: break-all
@@ -40,4 +48,4 @@ word-break: break-all
 }
 
 
-  
+  ////////////////////////////////////////////////

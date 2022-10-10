@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getUser } from './API/server-request';
 import imgListTamplate from './components/imgList.hbs';
 import PaxaBayServiseApi from './API/photo-servis-api';
@@ -15,15 +16,27 @@ function sabmitFormOn(evt) {
   evt.preventDefault();
 
   const search = evt.currentTarget.elements.searchQuery.value;
+  if (search === '') {
+    console.log('поиск пуст');
+    return Notify.failure('Введите запрос');
+  } else {
+    console.log('  поиск не пуст');
+    paxaBayServiseApi.query = search;
+    paxaBayServiseApi.resetPage(); // сброс страницы
+    paxaBayServiseApi.fetchImg().then(hits => {
+      clearImgListContainer(); // очищает форму перед новым запросом поиска
+      appendImgListTamplate(hits);
+    });
+  }
 
-  paxaBayServiseApi.query = search;
-  paxaBayServiseApi.resetPage(); // сброс страницы
-  paxaBayServiseApi.fetchImg().then(hits => {
-    clearImgListContainer(); // ощищает форму перед новым запросом поиска
-    appendImgListTamplate(hits);
-  });
   paxaBayServiseApi.fetchImg().then(hits => {
     console.log(hits.total);
+    if (hits.total === 0) {
+      return Notify.warning('По Вашему запросу ничео не найдено.');
+    } else {
+      Notify.success(`Мы нашли ${hits.total} зображений`);
+      console.log(`количество изображений ${hits.total}`);
+    }
   });
 }
 

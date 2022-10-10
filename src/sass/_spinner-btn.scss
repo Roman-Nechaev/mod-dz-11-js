@@ -1,0 +1,20 @@
+.button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+.btn{
+width: 100%;
+    margin: 40px auto;
+    text-align: center;
+
+}
+.button.is-hidden {
+    display: none;
+}
+
+.button>.spinner.is-hidden {
+    display: none;
+}
