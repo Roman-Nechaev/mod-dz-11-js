@@ -24,7 +24,7 @@ export default class PaxaBayServiseApi {
       const { data } = response;
       const { hits } = data;
 
-      // console.log(data.hits);
+      console.log(data.hits);
       return data;
     } catch (error) {
       console.error(error);

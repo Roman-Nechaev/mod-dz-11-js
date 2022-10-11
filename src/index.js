@@ -4,9 +4,14 @@ import imgListTamplate from './components/imgList.hbs';
 import PaxaBayServiseApi from './API/photo-servis-api';
 import LoadMoreBtn from './components/load-more-btn';
 
+// Описан в документации
+import SimpleLightbox from 'simplelightbox';
+
+// Дополнительный импорт стилей
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const galleryListRef = document.querySelector('.gallery');
 const searchFormRef = document.querySelector('.search-form');
-const loadMoreBtnHtml = document.querySelector('.load-more');
 
 const paxaBayServiseApi = new PaxaBayServiseApi();
 
@@ -15,13 +20,7 @@ const loadMoreBtn = new LoadMoreBtn({
   hidden: true,
 });
 
-// loadMoreBtn.enable(); // состояние активной кнопки
-// loadMoreBtn.disable(); //состояние неактивной кнопки
-// loadMoreBtn.show(); // показать кнопку
-// loadMoreBtn.hide();  // скрыть кнопку
-
 searchFormRef.addEventListener('submit', sabmitFormOn);
-// loadMoreBtnHtml.addEventListener('click', OnLoadMoreQuery);
 loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 
 function onLoadMore(evt) {
@@ -41,7 +40,6 @@ function onLoadMore(evt) {
 
 function sabmitFormOn(evt) {
   evt.preventDefault();
-
   const search = evt.currentTarget.elements.searchQuery.value;
   if (search === '') {
     console.log('поиск пуст');
@@ -69,15 +67,6 @@ function sabmitFormOn(evt) {
   }
 }
 
-// function OnLoadMoreQuery() {
-//   paxaBayServiseApi.fetchImg().then(appendImgListTamplate);
-//   paxaBayServiseApi.fetchImg().then(data => {
-//     if (data.hits.length === 0) {
-//       console.log('А на этом все ');
-//     }
-//   });
-// }
-
 function appendImgListTamplate(hits) {
   galleryListRef.insertAdjacentHTML('beforeend', imgListTamplate(hits));
 }
@@ -85,3 +74,10 @@ function appendImgListTamplate(hits) {
 function clearImgListContainer() {
   galleryListRef.innerHTML = '';
 }
+new SimpleLightbox('.gallery a', {
+  /* options */
+  //   captionsData: 'alt',
+  //   captionDelay: 250,
+});
+// console.log(lightbox);
+// refresh(); // Уничтожает и повторно инициализирует лайтбокс

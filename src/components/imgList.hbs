@@ -1,8 +1,6 @@
 {{#each this.hits}}
-    <div class="photo-card">
-
-    <img src="{{webformatURL}}" alt="" loading="lazy"  style="width:100%" />
-    
+    <div class="gallery">
+<a href={{largeImageURL}}><img src={{webformatURL}} alt={{tags}} loading="lazy" style="width:100%"/></a>
     <div class="info">
         <p class="info-item">
             <b>Likesа </b>{{likes}}
@@ -17,6 +15,8 @@
             <b>Downloads </b>{{downloads}}
         </p>
     </div>
-   
 </div>
 {{/each}}
+
+
+{{!-- <img src="{{webformatURL}}" alt="" loading="lazy" style="width:100%" /> --}}
