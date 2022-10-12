@@ -76,8 +76,8 @@ function clearImgListContainer() {
 }
 new SimpleLightbox('.gallery a', {
   /* options */
-  //   captionsData: 'alt',
-  //   captionDelay: 250,
+  // captionsData: 'alt',
+  // captionDelay: 250,
 });
 // console.log(lightbox);
 // refresh(); // Уничтожает и повторно инициализирует лайтбокс

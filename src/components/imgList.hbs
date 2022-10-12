@@ -2,21 +2,39 @@
     <div class="gallery">
 <a href={{largeImageURL}}><img src={{webformatURL}} alt={{tags}} loading="lazy" style="width:100%"/></a>
     <div class="info">
-        <p class="info-item">
-            <b>Likesа </b>{{likes}}
-        </p>
-        <p class="info-item">
-            <b>Views </b>{{views}}
-        </p>
-        <p class="info-item">
-            <b>Comments </b>{{comments}}
-        </p>
-        <p class="info-item">
-            <b>Downloads </b>{{downloads}}
-        </p>
+    <table class="table-v " style = "width: 100%;" border="0" >
+        <tr>
+            <th >Likesа</th>
+            <th>Views</th>
+            <th>Comments</th>
+            <th>Downloads</th>
+        </tr>
+        <tr>
+            <td style = "width: 100px;">{{likes}}</td>
+            <td>{{views}}</td>
+            <td>{{comments}}</td>
+            <td>{{downloads}}</td>
+        </tr>
+        
+    </table>
+
     </div>
 </div>
 {{/each}}
 
 
 {{!-- <img src="{{webformatURL}}" alt="" loading="lazy" style="width:100%" /> --}}
+
+
+
+{{!-- <p class="info-item"><b>Likesа</b></p>
+<span class="price">{{likes}}</span>
+
+<p class="info-item"><b>Views</b></p>
+<span class="price">{{views}}</span>
+
+<p class="info-item"><b>Comments</b></p>
+<span class="price">{{comments}}</span>
+
+<p class="info-item"><b>Downloads</b></p>
+<span class="price">{{downloads}}</span> --}}
