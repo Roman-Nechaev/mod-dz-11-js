@@ -28,6 +28,7 @@ function onLoadMore(evt) {
 
   paxaBayServiseApi.fetchImg().then(data => {
     appendImgListTamplate(data);
+
     if (data.hits.length === 0) {
       console.log('А на этом все ');
 
@@ -40,7 +41,9 @@ function onLoadMore(evt) {
 
 function sabmitFormOn(evt) {
   evt.preventDefault();
+
   const search = evt.currentTarget.elements.searchQuery.value;
+
   if (search === '') {
     console.log('поиск пуст');
     return Notify.failure('Введите запрос');
@@ -53,7 +56,6 @@ function sabmitFormOn(evt) {
       clearImgListContainer(); // очищает форму перед новым запросом поиска
       appendImgListTamplate(hits);
       loadMoreBtn.enable(); // состояние активной кнопки
-
       if (hits.total === 0) {
         loadMoreBtn.hide(); // скрыть кнопку
         return Notify.warning('По Вашему запросу ничего не найдено.');
@@ -69,15 +71,16 @@ function sabmitFormOn(evt) {
 
 function appendImgListTamplate(hits) {
   galleryListRef.insertAdjacentHTML('beforeend', imgListTamplate(hits));
+  const box = new SimpleLightbox('.gallery a', {
+    /* options */
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
 }
 
 function clearImgListContainer() {
   galleryListRef.innerHTML = '';
 }
-new SimpleLightbox('.gallery a', {
-  /* options */
-  // captionsData: 'alt',
-  // captionDelay: 250,
-});
+
 // console.log(lightbox);
 // refresh(); // Уничтожает и повторно инициализирует лайтбокс
