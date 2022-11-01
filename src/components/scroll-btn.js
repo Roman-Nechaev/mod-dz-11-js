@@ -1,22 +1,45 @@
 export default class ScrollBtn {
-  constructor({ selector, hidden = false }) {
-    this.refs = this.getRefs(selector);
+  constructor({ selector }) {
+    this.refs = this._getRefs(selector);
 
-    hidden && this.hide();
+    this._magic();
+    this._foo();
+    this._onClick();
   }
 
-  getRefs(selector) {
+  _getRefs(selector) {
     const refs = {};
-    refs.button = document.querySelector(selector);
+    refs.btn = document.querySelector(selector);
+    refs.up = document.querySelector('.search-form');
+    refs.opac = document.querySelector('.opacity-tes');
 
     return refs;
   }
 
-  show() {
-    this.refs.button.classList.remove('is-hidden');
+  _onClick() {
+    console.log(this.refs.up);
+    this.refs.btn.onclick = function () {
+      window.scrollTo({
+        top: document.querySelector('.search-form'),
+        behavior: 'smooth',
+      });
+    };
+  }
+  _magic() {
+    // let yOffset = window.pageYOffset;
+    // if (yOffset < 20) {
+    //   console.log('20');
+    //   // this.refs.opac.classList.add('opacity-tes');
+    // } else {
+    //   // this.refs.opac.classList.remove('opacity-tes');
+    //   console.log('No');
+    // }
+    // console.log(yOffset);
   }
 
-  hide() {
-    this.refs.button.classList.add('is-hidden');
+  _foo() {
+    // console.log(window.onscroll);
+    window.onscroll = this._magic;
+    // console.log(this._magic);
   }
 }

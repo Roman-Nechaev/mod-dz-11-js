@@ -3,6 +3,7 @@ import { getUser } from './API/server-request';
 import imgListTamplate from './components/imgList.hbs';
 import PaxaBayServiseApi from './API/photo-servis-api';
 import LoadMoreBtn from './components/load-more-btn';
+import ScrollBtn from './components/scroll-btn';
 
 // Описан в документации
 import SimpleLightbox from 'simplelightbox';
@@ -13,6 +14,8 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const galleryListRef = document.querySelector('.gallery');
 const searchFormRef = document.querySelector('.search-form');
 const scrollBtnRf = document.querySelector('.scrol-btn');
+const opac = document.querySelector('.opacity-tes');
+
 // scrollBtnRf.classList.add('is-hidden'); // скрыть
 const paxaBayServiseApi = new PaxaBayServiseApi();
 
@@ -75,6 +78,7 @@ function sabmitFormOn(evt) {
 
 function appendImgListTamplate(hits) {
   galleryListRef.insertAdjacentHTML('beforeend', imgListTamplate(hits));
+
   const box = new SimpleLightbox('.gallery a', {
     /* options */
     captionsData: 'alt',
@@ -106,23 +110,48 @@ function clearImgListContainer() {
 //     });
 //   });
 // });
-let btn = document.querySelector('.scrol-btn');
-//
-function magic() {
-  if (window.pageYOffset > 20) {
-    btn.style.opacity = '1';
+// let btn = document.querySelector('.scrol-btn');
+// //
+// function magic() {
+//   if (window.pageYOffset > 20) {
+//     btn.style.opacity = '1';
+//   } else {
+//     btn.style.opacity = '0';
+//   }
+// }
+// function boo(params) {
+//   btn.onclick = function () {
+//     window.scrollTo({
+//       top: searchFormRef,
+//       behavior: 'smooth',
+//     });
+//   };
+// }
+// //
+// boo();
+
+// // When scrolling, we run the function
+// function foo(params) {
+//   window.onscroll = magic;
+// }
+// foo();
+
+const scrollBtn = new ScrollBtn({
+  selector: '[data-scrolling]',
+});
+console.log(scrollBtn);
+
+function opesss(params) {
+  let yOffset = window.pageYOffset;
+
+  if (yOffset > 20) {
+    console.log('20');
+    opac.classList.remove('opacity-tes');
   } else {
-    btn.style.opacity = '0';
+    opac.classList.add('opacity-tes');
+
+    console.log('No');
   }
 }
-
-//
-btn.onclick = function () {
-  window.scrollTo({
-    top: searchFormRef,
-    behavior: 'smooth',
-  });
-};
-
-// When scrolling, we run the function
-window.onscroll = magic;
+opesss();
+window.onscroll = opesss;
